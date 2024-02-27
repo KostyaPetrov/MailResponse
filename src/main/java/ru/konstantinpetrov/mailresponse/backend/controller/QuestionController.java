@@ -18,7 +18,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     @Autowired
-    public void setUserService(QuestionService questionService) {
+    public void setQuestionService(QuestionService questionService) {
         this.questionService = questionService;
     }
 

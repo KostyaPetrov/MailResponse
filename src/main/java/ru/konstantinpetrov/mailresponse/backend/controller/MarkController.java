@@ -16,7 +16,7 @@ public class MarkController {
        private MarkService markService;
 
     @Autowired
-    public void setUserService(MarkService markService) {
+    public void setMarkService(MarkService markService) {
         this.markService = markService;
     }
 

@@ -21,7 +21,7 @@ public class ReviewQuestionController {
     private ReviewQuestionService reviewQuestionService;
 
     @Autowired
-    public void setUserService(ReviewQuestionService reviewQuestionService) {
+    public void setReviewQuestionService(ReviewQuestionService reviewQuestionService) {
         this.reviewQuestionService = reviewQuestionService;
     }
 
