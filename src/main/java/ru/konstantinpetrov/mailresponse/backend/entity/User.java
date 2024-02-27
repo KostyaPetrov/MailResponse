@@ -22,7 +22,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true)
-    private String login;
+    private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)

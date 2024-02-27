@@ -3,10 +3,12 @@ package ru.konstantinpetrov.mailresponse.backend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ru.konstantinpetrov.mailresponse.backend.entity.ReviewQuestion;
 import ru.konstantinpetrov.mailresponse.backend.repository.ReviewRepository;
 
+@Service
 public class ReviewQuestionServiceImpl implements ReviewQuestionService{
 
     private ReviewRepository reviewRepository;

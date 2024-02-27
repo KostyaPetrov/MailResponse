@@ -1,10 +1,12 @@
 package ru.konstantinpetrov.mailresponse.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.repository.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;

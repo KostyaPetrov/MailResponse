@@ -13,7 +13,7 @@ import ru.konstantinpetrov.mailresponse.backend.service.MarkService;
 
 @RestController
 public class MarkController {
-       private MarkService markService;
+    private MarkService markService;
 
     @Autowired
     public void setMarkService(MarkService markService) {

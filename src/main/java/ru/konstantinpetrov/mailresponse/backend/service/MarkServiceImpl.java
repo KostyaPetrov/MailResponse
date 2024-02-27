@@ -1,10 +1,12 @@
 package ru.konstantinpetrov.mailresponse.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ru.konstantinpetrov.mailresponse.backend.entity.Mark;
 import ru.konstantinpetrov.mailresponse.backend.repository.MarkRepository;
 
+@Service
 public class MarkServiceImpl implements MarkService {
 
     private MarkRepository markRepository;
