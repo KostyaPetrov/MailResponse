@@ -6,4 +6,6 @@ import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 
 public interface QuestionService {
     List<Question> getQuestion();
+
+    List<Long> getIdQuestion(long userId);
 }

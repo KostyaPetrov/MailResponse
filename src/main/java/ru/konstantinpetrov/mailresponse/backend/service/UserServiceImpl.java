@@ -19,16 +19,19 @@ public class UserServiceImpl implements UserService{
     @Override
     public void addUser(User user){
         try{
+            System.out.println("Servise get user:");
             this.userRepository.save(user);
+            System.out.println("User saved");
         }catch(Exception exception){
             throw new IllegalArgumentException("Client with current login is already exists!");
         }   
     }
 
     @Override
-    public void findUser(String name) {
+    public User findUser(String name) {
         try{
-            this.userRepository.findByName(name);
+            User user = this.userRepository.findByName(name);
+            return user;
         }catch(Exception exception){
             throw new IllegalArgumentException("This user is does not exists");
         }

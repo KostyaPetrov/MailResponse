@@ -16,7 +16,10 @@ public class Question {
     private long id;
 
     @Column(nullable = false)
-    private String text_question;
+    private String textQuestion;
+
+    @Column(nullable = false)
+    private long userId;
 
     @Column(nullable = false)
     private Integer countReview;
