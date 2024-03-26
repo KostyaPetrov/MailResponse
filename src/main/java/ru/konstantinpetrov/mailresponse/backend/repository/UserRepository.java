@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByName(String name);
+
+    User findByUserId(Long id);
 }

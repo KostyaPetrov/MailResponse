@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ru.konstantinpetrov.mailresponse.backend.entity.PermissionStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.repository.QuestionRepository;
 
@@ -39,4 +40,57 @@ public class QuestionServiceImpl implements QuestionService {
         return returnList;
     }
 
+    @Override
+    public void deleteQuestionById(long id){
+        try{
+            this.questionRepository.deleteById(id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteQuestionByText(String text){
+        try{
+            this.questionRepository.deleteByText(text);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteQuestionByUserId(Long userId){
+        try{
+            this.questionRepository.deleteAllByUserId(userId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void deleteQuestionByPermissionStatus(PermissionStatus permissionStatus){
+        try{
+            this.questionRepository.deleteAllByPermissionStatus(permissionStatus);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void changePermissionStatus(Long questionId){
+        try{
+            Question question = questionRepository.getById(questionId);
+            if(question.getPermissionStatus()==PermissionStatus.OPEN){
+                question.setPermissionStatus(PermissionStatus.CLOSE);
+            }else{
+                question.setPermissionStatus(PermissionStatus.OPEN);
+            }
+
+            questionRepository.save(question);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

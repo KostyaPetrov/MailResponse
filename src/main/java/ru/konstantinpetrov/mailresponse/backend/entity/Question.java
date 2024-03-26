@@ -23,4 +23,7 @@ public class Question {
 
     @Column(nullable = false)
     private Integer countReview;
+
+    @Column(nullable = false)
+    private PermissionStatus permissionStatus;
 }

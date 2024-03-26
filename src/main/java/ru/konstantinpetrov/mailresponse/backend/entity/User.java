@@ -1,10 +1,17 @@
 package ru.konstantinpetrov.mailresponse.backend.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,8 +35,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // public User(String login, String password) {
+    @Column
+    private Roles role;
+
+    @Column
+    private BlockStatus BlockStatus;
+
+    // public -User(String login, String password) {
     //     this.login = login;
     //     this.password = password;
     // }
+
+    
+
 }
