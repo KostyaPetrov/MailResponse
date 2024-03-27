@@ -12,7 +12,7 @@ import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> getAllByUserId(long userId);
 
-    void deleteByText(String text);
+    void deleteByTextQuestion(String text);
 
     void deleteAllByUserId(long userId);
 

@@ -104,9 +104,9 @@ public class UserController {
 		try {
             System.out.println("User Controller get name " + name +" for find information");
 			User user = this.userService.findUser(name);
-            List<Long> listQuestionId = this.questionService.getIdQuestion(user.getId());   
+            List<Long> listQuestionId = this.questionService.getIdQuestion(user.getUserId());   
 
-			return new ResponseEntity<>(new ResponseUserDTO(user.getId(), listQuestionId, "User was found succes"),
+			return new ResponseEntity<>(new ResponseUserDTO(user.getUserId(), listQuestionId, "User was found succes"),
                  HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ResponseUserDTO(0, null, "User not found"),

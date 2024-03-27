@@ -1,3 +1,4 @@
+
 package ru.konstantinpetrov.mailresponse.backend.entity;
 
 import javax.persistence.Column;

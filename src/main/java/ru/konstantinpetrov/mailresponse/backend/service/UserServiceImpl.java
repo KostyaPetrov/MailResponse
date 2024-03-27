@@ -1,12 +1,10 @@
 package ru.konstantinpetrov.mailresponse.backend.service;
 
-import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.konstantinpetrov.mailresponse.backend.entity.BlockStatus;
-import ru.konstantinpetrov.mailresponse.backend.entity.PermissionStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.repository.UserRepository;

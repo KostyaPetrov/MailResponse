@@ -52,7 +52,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteQuestionByText(String text){
         try{
-            this.questionRepository.deleteByText(text);
+            this.questionRepository.deleteByTextQuestion(text);
         }catch(Exception e){
             e.printStackTrace();
         }
