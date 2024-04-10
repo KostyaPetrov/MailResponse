@@ -1,0 +1,16 @@
+    @startuml MailResponse
+
+    class SecurityConfig {
+      +configure(final HttpSecurity http): void
+      +passwordEncoder(): PasswordEncoder
+    }
+
+    class MarkController {
+      markService:   MarkService
+      +setMarkService(markService: MarkService): void
+      +addMark(mark: Mark): ResponseEntity<ResponseEnterDTO>
+    }
+
+    SecurityConfig --> MarkController
+    
+    @enduml

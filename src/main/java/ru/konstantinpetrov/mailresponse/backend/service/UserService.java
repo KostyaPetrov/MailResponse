@@ -1,5 +1,6 @@
 package ru.konstantinpetrov.mailresponse.backend.service;
 
+import ru.konstantinpetrov.mailresponse.backend.dtoLayer.GetUserDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 
@@ -11,4 +12,6 @@ public interface UserService {
     Roles getUserRole(Long id);
 
     void changeBlockStatus(Long id);
+    
+    boolean authUser(GetUserDTO userDTO);
 }

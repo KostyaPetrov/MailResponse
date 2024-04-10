@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +23,13 @@ import ru.konstantinpetrov.mailresponse.backend.service.UserService;
 
 
 
+
 @RestController
 public class UserController {
 
-
     private UserService userService;
-
     private QuestionService questionService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -39,6 +40,12 @@ public class UserController {
     public void setQuestionService(QuestionService questionService) {
         this.questionService = questionService;
     }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     
     	
 	@PostMapping(path="/addUser")
@@ -47,7 +54,7 @@ public class UserController {
             System.out.println("Controller get User: " + userDTO);
             User user= new User();
             user.setName(user.getName());
-            user.setPassword(user.getPassword());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRole(Roles.USER);
             user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);
@@ -113,4 +120,17 @@ public class UserController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
+
+    @GetMapping("/authUser")
+    public ResponseEntity<ResponseEnterDTO> getMethodName(@RequestBody GetUserDTO userDTO) {
+        try{
+            userService.authUser(userDTO);
+            return new ResponseEntity<>(new ResponseEnterDTO(true),
+                 HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(new ResponseEnterDTO(false),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+    
 }
