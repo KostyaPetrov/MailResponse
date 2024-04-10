@@ -121,8 +121,8 @@ public class UserController {
         }
 	}
 
-    @GetMapping("/authUser")
-    public ResponseEntity<ResponseEnterDTO> getMethodName(@RequestBody GetUserDTO userDTO) {
+    @PostMapping("/authUser")
+    public ResponseEntity<ResponseEnterDTO> authUser(@RequestBody GetUserDTO userDTO) {
         try{
             userService.authUser(userDTO);
             return new ResponseEntity<>(new ResponseEnterDTO(true),
