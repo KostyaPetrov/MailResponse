@@ -21,9 +21,13 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
 
     @Override
     public List<ReviewQuestion> getReview(Long id){
+        System.out.println("In getReview method");
+        this.reviewRepository.findAllByQuestionId(id);
+        System.out.println("Test get responce");
 
         List<ReviewQuestion> listReview = this.reviewRepository.findAllByQuestionId(id);
-        
+        System.out.println("Test save responce");
+
         return listReview;
     }
 

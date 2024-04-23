@@ -20,6 +20,7 @@ import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
 import ru.konstantinpetrov.mailresponse.backend.service.QuestionService;
 import ru.konstantinpetrov.mailresponse.backend.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -47,6 +48,22 @@ public class QuestionController {
                  HttpStatus.OK);
         } catch (Exception e) {
             ResponseQuestionDTO response=new ResponseQuestionDTO(null, "Error receiving questions");
+            return new ResponseEntity<>(response,
+                    HttpStatus.BAD_REQUEST);
+        }
+	}
+
+    @PostMapping(path="/addQuestion")
+	public ResponseEntity<ResponseEnterDTO> addQuestion(@RequestBody Question question) {
+		try {
+			questionService.addQuestion(question);
+            
+			ResponseEnterDTO response=new ResponseEnterDTO(true);
+			return new ResponseEntity<>(response,
+                 HttpStatus.OK);
+        } catch (Exception e) {
+            ResponseEnterDTO response=new ResponseEnterDTO(false);
+
             return new ResponseEntity<>(response,
                     HttpStatus.BAD_REQUEST);
         }

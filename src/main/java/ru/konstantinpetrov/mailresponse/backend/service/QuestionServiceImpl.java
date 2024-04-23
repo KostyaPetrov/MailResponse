@@ -93,4 +93,13 @@ public class QuestionServiceImpl implements QuestionService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void addQuestion(Question question){
+        try{
+            this.questionRepository.save(question);
+        }catch(Exception exception){
+            throw new IllegalArgumentException("Question already exists!");
+        }   
+    }
 }

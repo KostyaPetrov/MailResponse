@@ -53,8 +53,8 @@ public class UserController {
 		try {
             System.out.println("Controller get User: " + userDTO);
             User user= new User();
-            user.setName(user.getName());
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setName(userDTO.getName());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             user.setRole(Roles.USER);
             user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);

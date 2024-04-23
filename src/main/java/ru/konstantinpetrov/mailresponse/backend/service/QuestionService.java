@@ -19,4 +19,6 @@ public interface QuestionService {
     void deleteQuestionByPermissionStatus(PermissionStatus permissionStatus);
 
     void changePermissionStatus(Long questionId);
+
+    void addQuestion(Question question);
 }
