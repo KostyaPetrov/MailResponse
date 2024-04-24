@@ -34,10 +34,7 @@ public class User {
     @Column
     private BlockStatus BlockStatus;
 
-    // public -User(String login, String password) {
-    //     this.login = login;
-    //     this.password = password;
-    // }
+    
 
     
 

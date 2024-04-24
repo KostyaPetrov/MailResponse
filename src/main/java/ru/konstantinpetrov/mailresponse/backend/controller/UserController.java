@@ -69,13 +69,14 @@ public class UserController {
 	}
 
     @PostMapping(path="/addModerator")
-	public ResponseEntity<ResponseEnterDTO> addModerator(@RequestBody GetUserDTO userDto) {
+	public ResponseEntity<ResponseEnterDTO> addModerator(@RequestBody GetUserDTO userDTO) {
 		try {
-            System.out.println("Controller get User: " + userDto);
+            System.out.println("Controller get User: " + userDTO);
             User user= new User();
-            user.setName(user.getName());
-            user.setPassword(user.getPassword());
+            user.setName(userDTO.getName());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             user.setRole(Roles.MODERATOR);
+            user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);
 			
 			return new ResponseEntity<>(new ResponseEnterDTO(true),

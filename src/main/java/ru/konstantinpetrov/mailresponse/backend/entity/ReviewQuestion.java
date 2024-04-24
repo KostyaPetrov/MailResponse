@@ -8,16 +8,16 @@ import lombok.*;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "review_question")
+@Table(name = "review_questions")
 public class ReviewQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String textReview; 
 
     @Column(nullable = false)
-    private Integer questionId;
+    private Long questionId;
     
 }

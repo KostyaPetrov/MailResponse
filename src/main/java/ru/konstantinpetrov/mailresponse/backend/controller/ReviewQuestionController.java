@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ResponseEnterDTO;
 import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ResponseReviewQuestionDTO;
+import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ReviewQuestionDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.ReviewQuestion;
 import ru.konstantinpetrov.mailresponse.backend.service.ReviewQuestionService;
 
@@ -29,20 +30,27 @@ public class ReviewQuestionController {
     @GetMapping(path="/getResponse/{id}")
 	public ResponseEntity<ResponseReviewQuestionDTO> getReviewQuestion(@PathVariable Long id) {
 		try {
+            // System.out.println("get id:");
+            // System.out.println(id);
 			List<ReviewQuestion> responseList = reviewQuestionService.getReview(id);
 			ResponseReviewQuestionDTO response=new ResponseReviewQuestionDTO(responseList, "Response succes getted");
 			return new ResponseEntity<>(response,
                  HttpStatus.OK);
+           
         } catch (Exception e) {
             ResponseReviewQuestionDTO response=new ResponseReviewQuestionDTO(null, "Error receiving response");
             return new ResponseEntity<>(response,
                     HttpStatus.BAD_REQUEST);
+
         }
 	}
 
     @PostMapping(path="/addResponse")
-	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestion reviewQuestion) {
+	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
 		try {
+            ReviewQuestion reviewQuestion=new ReviewQuestion();
+            reviewQuestion.setTextReview(reviewQuestionDTO.getTextReview());
+            reviewQuestion.setQuestionId(reviewQuestionDTO.getQuestionId());
 			reviewQuestionService.addReview(reviewQuestion);
 			ResponseEnterDTO response=new ResponseEnterDTO(true);
 			return new ResponseEntity<>(response,
