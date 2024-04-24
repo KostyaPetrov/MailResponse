@@ -40,4 +40,13 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
             throw new IllegalArgumentException("An error occurred while saving the response");
         }   
     }
+
+    @Override
+    public void deleteResponseByQuestionId(Long id){
+        try{
+            this.reviewRepository.deleteAllById(id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

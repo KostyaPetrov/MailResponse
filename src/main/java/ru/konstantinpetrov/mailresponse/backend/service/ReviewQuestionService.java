@@ -10,4 +10,6 @@ public interface ReviewQuestionService {
     // void getReview(Long id);
 
     void addReview(ReviewQuestion reviewQuestion);
+
+    void deleteResponseByQuestionId(Long id);
 }
