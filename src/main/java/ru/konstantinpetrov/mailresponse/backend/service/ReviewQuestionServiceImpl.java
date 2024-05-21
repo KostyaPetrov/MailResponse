@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.konstantinpetrov.mailresponse.backend.entity.ReviewQuestion;
 import ru.konstantinpetrov.mailresponse.backend.repository.ReviewRepository;
 
@@ -33,6 +34,7 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
     }
 
     @Override
+    @Transactional
     public void addReview(ReviewQuestion reviewQuestion){
         try{
             this.reviewRepository.save(reviewQuestion);

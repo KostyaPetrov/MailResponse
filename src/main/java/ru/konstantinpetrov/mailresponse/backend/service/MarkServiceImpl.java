@@ -2,7 +2,7 @@ package ru.konstantinpetrov.mailresponse.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.konstantinpetrov.mailresponse.backend.entity.Mark;
 import ru.konstantinpetrov.mailresponse.backend.repository.MarkRepository;
 
@@ -17,6 +17,7 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
+    @Transactional
     public void addMark(Mark mark){
         try{
             this.markRepository.save(mark);

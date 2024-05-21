@@ -1,6 +1,12 @@
 package ru.konstantinpetrov.mailresponse.backend.entity;
 
-public enum Roles {
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+public enum Roles{
     USER,
-    MODERATOR
+    MODERATOR;
+
 }

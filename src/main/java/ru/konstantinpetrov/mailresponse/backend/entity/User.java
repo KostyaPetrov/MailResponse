@@ -1,15 +1,9 @@
 package ru.konstantinpetrov.mailresponse.backend.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Data
@@ -19,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private long userId;
 
+    @Getter
     @Column(nullable = false, unique = true)
     private String name;
 
@@ -28,14 +24,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
+    @Getter
+    @Column(nullable = false)
     private Roles role;
 
-    @Column
-    private BlockStatus BlockStatus;
+    @Column(name = "block_status", nullable = false)
+    private BlockStatus blockStatus;
 
-    
-
-    
+    public String getUsername() {
+        return name;
+    }
 
 }

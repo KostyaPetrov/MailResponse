@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.konstantinpetrov.mailresponse.backend.dtoLayer.GetUserDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.BlockStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void addUser(User user){
         try{
             System.out.println("Servise get user:");
@@ -60,6 +62,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void changeBlockStatus(Long id){
         try{
             User user=userRepository.findByUserId(id);

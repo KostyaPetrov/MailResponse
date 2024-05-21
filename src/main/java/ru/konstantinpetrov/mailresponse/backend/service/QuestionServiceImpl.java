@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.konstantinpetrov.mailresponse.backend.entity.PermissionStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.repository.QuestionRepository;
@@ -41,6 +42,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void deleteQuestionById(long id){
         try{
             this.questionRepository.deleteById(id);
@@ -50,6 +52,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void deleteQuestionByText(String text){
         try{
             this.questionRepository.deleteByTextQuestion(text);
@@ -59,6 +62,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void deleteQuestionByUserId(Long userId){
         try{
             this.questionRepository.deleteAllByUserId(userId);
@@ -69,6 +73,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
+    @Transactional
     public void deleteQuestionByPermissionStatus(PermissionStatus permissionStatus){
         try{
             this.questionRepository.deleteAllByPermissionStatus(permissionStatus);
@@ -78,6 +83,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void changePermissionStatus(Long questionId){
         try{
             Question question = questionRepository.getById(questionId);
@@ -95,6 +101,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void addQuestion(Question question){
         try{
             this.questionRepository.save(question);
