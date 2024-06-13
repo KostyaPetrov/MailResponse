@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,17 +39,21 @@ public class ReviewQuestionController {
     }
 
 
+
     @GetMapping(path="/getResponse/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseReviewQuestionDTO> getReviewQuestion(@PathVariable Long id) {
 		try {
             // System.out.println("get id:");
             // System.out.println(id);
+            System.out.println(id);
 			List<ReviewQuestion> responseList = reviewQuestionService.getReview(id);
 			ResponseReviewQuestionDTO response=new ResponseReviewQuestionDTO(responseList, "Response succes getted");
 			return new ResponseEntity<>(response,
                  HttpStatus.OK);
            
         } catch (Exception e) {
+            System.out.println("Error: " + e);
             ResponseReviewQuestionDTO response=new ResponseReviewQuestionDTO(null, "Error receiving response");
             return new ResponseEntity<>(response,
                     HttpStatus.BAD_REQUEST);
@@ -57,17 +62,20 @@ public class ReviewQuestionController {
 	}
 
     @PostMapping(path="/addResponse")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
 		try {
+            System.out.println(reviewQuestionDTO);
             ReviewQuestion reviewQuestion=new ReviewQuestion();
             reviewQuestion.setTextReview(reviewQuestionDTO.getTextReview());
             reviewQuestion.setQuestionId(reviewQuestionDTO.getQuestionId());
 			reviewQuestionService.addReview(reviewQuestion);
-			ResponseEnterDTO response=new ResponseEnterDTO(true);
+			ResponseEnterDTO response=new ResponseEnterDTO(true, "Успешно");
 			return new ResponseEntity<>(response,
                  HttpStatus.OK);
         } catch (Exception e) {
-            ResponseEnterDTO response=new ResponseEnterDTO(false);
+            System.out.println("Error: " + e);
+            ResponseEnterDTO response=new ResponseEnterDTO(false,"Произошла ошибка");
             return new ResponseEntity<>(response,
                     HttpStatus.BAD_REQUEST);
         }
@@ -75,9 +83,10 @@ public class ReviewQuestionController {
 
     @CrossOrigin
     @DeleteMapping(path="/deleteResponse/{userId}/{responseId}")
+    @PreAuthorize("hasRole('MODERATOR')")
     public ResponseEntity<ResponseEnterDTO> deleteResponseById(@PathVariable Long userId, @PathVariable Long responseId) {
 		try {
-
+            System.out.println(userId + " " + responseId);
             Roles role=userService.getUserRole(userId);
             
             if(role!=Roles.MODERATOR){
@@ -85,11 +94,12 @@ public class ReviewQuestionController {
             }
 
 		    reviewQuestionService.deleteResponseByQuestionId(responseId);
-			ResponseEnterDTO response=new ResponseEnterDTO(true);
+            ResponseEnterDTO response=new ResponseEnterDTO(true, "Успешно");
 			return new ResponseEntity<>(response,
                  HttpStatus.OK);
         } catch (Exception e) {
-            ResponseEnterDTO response=new ResponseEnterDTO(false);
+            System.out.println("Error: " + e);
+            ResponseEnterDTO response=new ResponseEnterDTO(false,"Произошла ошибка");
             return new ResponseEntity<>(response,
                     HttpStatus.BAD_REQUEST);
         }

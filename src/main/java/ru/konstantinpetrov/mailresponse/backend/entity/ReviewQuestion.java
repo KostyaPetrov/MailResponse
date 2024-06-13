@@ -14,10 +14,10 @@ public class ReviewQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name="text_review", nullable = false)
     private String textReview; 
 
-    @Column(nullable = false)
+    @Column(name="question_id", nullable = false)
     private Long questionId;
     
 }

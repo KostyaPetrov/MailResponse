@@ -20,7 +20,7 @@ public class Mark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name="question_id", nullable = false)
     private Integer questionId;
 
     @Column(nullable = false)

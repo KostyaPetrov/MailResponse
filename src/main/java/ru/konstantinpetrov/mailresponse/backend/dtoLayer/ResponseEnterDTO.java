@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseEnterDTO {
     private Boolean success;
+    private String text;
 }

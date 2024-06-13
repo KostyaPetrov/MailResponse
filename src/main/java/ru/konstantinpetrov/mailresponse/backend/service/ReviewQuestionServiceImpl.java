@@ -39,7 +39,8 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
         try{
             this.reviewRepository.save(reviewQuestion);
         }catch(Exception exception){
-            throw new IllegalArgumentException("An error occurred while saving the response");
+            System.out.println("Error: " + exception);
+            exception.printStackTrace();
         }   
     }
 
@@ -48,6 +49,7 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
         try{
             this.reviewRepository.deleteAllById(id);
         }catch(Exception e){
+            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }

@@ -37,17 +37,19 @@ public class UserServiceImpl implements UserService{
             this.userRepository.save(user);
             System.out.println("User saved");
         }catch(Exception exception){
-            throw new IllegalArgumentException("Client with current login is already exists!");
+            System.out.println("Error: " + exception);
         }   
     }
 
     @Override
     public User findUser(String name) {
         try{
+            System.out.println("User Controller get name " + name +" for find information");
             User user = this.userRepository.findByName(name);
             return user;
         }catch(Exception exception){
-            throw new IllegalArgumentException("This user is does not exists");
+            System.out.println("Error: " + exception);
+            throw new IllegalArgumentException(exception);
         }
     }
 
@@ -57,7 +59,8 @@ public class UserServiceImpl implements UserService{
             User user = this.userRepository.findByUserId(id);
             return user.getRole();
         }catch(Exception exception){
-            throw new IllegalArgumentException("This user is does not exists");
+            System.out.println("Error: " + exception);
+            throw new IllegalArgumentException("User not found");
         }
     }
 
@@ -73,7 +76,8 @@ public class UserServiceImpl implements UserService{
             }
             userRepository.save(user);
         }catch(Exception e){
-            throw new IllegalArgumentException("This user is does not exists");
+            System.out.println("Error: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -89,7 +93,8 @@ public class UserServiceImpl implements UserService{
             }
             
         }catch(Exception e){
-            System.out.println("пользователь не найден");
+            System.out.println("Error: " + e);
+            e.printStackTrace();
             return false;
         }
     }

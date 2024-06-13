@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,7 @@ public class UserController {
     
     	
 	@PostMapping(path="/addUser")
+    @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addUser(@RequestBody GetUserDTO userDTO) {
 		try {
             System.out.println("Controller get User: " + userDTO);
@@ -59,18 +61,20 @@ public class UserController {
             user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);
 			
-			return new ResponseEntity<>(new ResponseEnterDTO(true),
+			return new ResponseEntity<>(new ResponseEnterDTO(true, "Успешно"),
                  HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return new ResponseEntity<>(new ResponseEnterDTO(false),
+            System.out.println("Error: " + e);
+            return new ResponseEntity<>(new ResponseEnterDTO(false, "Произошла ошибка"),
                     HttpStatus.BAD_REQUEST);
         }
 	}
 
     @PostMapping(path="/addModerator")
+    @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addModerator(@RequestBody GetUserDTO userDTO) {
 		try {
+            System.out.println(userDTO);
             System.out.println("Controller get User: " + userDTO);
             User user= new User();
             user.setName(userDTO.getName());
@@ -79,18 +83,20 @@ public class UserController {
             user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);
 			
-			return new ResponseEntity<>(new ResponseEnterDTO(true),
+			return new ResponseEntity<>(new ResponseEnterDTO(true, "Успешно"),
                  HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return new ResponseEntity<>(new ResponseEnterDTO(false),
+            System.out.println("Error: " + e);
+            return new ResponseEntity<>(new ResponseEnterDTO(false, "Произошла ошибка"),
                     HttpStatus.BAD_REQUEST);
         }
 	}
 
     @PostMapping(path="/changeBlockStatus/{changerId}/{userId}")
+    @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> changeBlockStatus(@PathVariable Long changerId, @PathVariable Long userId) {
 		try {
+            System.out.println(changerId + " " + userId);
             Roles role=userService.getUserRole(changerId);
             if(role!=Roles.MODERATOR){
                 throw new Exception();    
@@ -98,16 +104,17 @@ public class UserController {
 			userService.changeBlockStatus(userId);
             
 			
-			return new ResponseEntity<>(new ResponseEnterDTO(true),
+			return new ResponseEntity<>(new ResponseEnterDTO(true, "Успешно"),
                  HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return new ResponseEntity<>(new ResponseEnterDTO(false),
+            System.out.println("Error: " + e);
+            return new ResponseEntity<>(new ResponseEnterDTO(false, "Произошла ошибка"),
                     HttpStatus.BAD_REQUEST);
         }
 	}
 
     @GetMapping(path="/findUser/{name}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseUserDTO> findUser(@PathVariable String name) {
 		try {
             System.out.println("User Controller get name " + name +" for find information");
@@ -117,19 +124,23 @@ public class UserController {
 			return new ResponseEntity<>(new ResponseUserDTO(user.getUserId(), listQuestionId, "User was found succes"),
                  HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println("Error: " + e);
             return new ResponseEntity<>(new ResponseUserDTO(0, null, "User not found"),
                     HttpStatus.BAD_REQUEST);
         }
 	}
 
     @PostMapping("/authUser")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<ResponseEnterDTO> authUser(@RequestBody GetUserDTO userDTO) {
         try{
+            System.out.println(userDTO);
             userService.authUser(userDTO);
-            return new ResponseEntity<>(new ResponseEnterDTO(true),
+            return new ResponseEntity<>(new ResponseEnterDTO(true, "Успешно"),
                  HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>(new ResponseEnterDTO(false),
+            System.out.println("Error: " + e);
+            return new ResponseEntity<>(new ResponseEnterDTO(false, "Произошла ошибка"),
                     HttpStatus.BAD_REQUEST);
         }
     }

@@ -47,6 +47,7 @@ public class QuestionServiceImpl implements QuestionService {
         try{
             this.questionRepository.deleteById(id);
         }catch(Exception e){
+            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -67,6 +68,7 @@ public class QuestionServiceImpl implements QuestionService {
         try{
             this.questionRepository.deleteAllByUserId(userId);
         }catch(Exception e){
+            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -78,6 +80,7 @@ public class QuestionServiceImpl implements QuestionService {
         try{
             this.questionRepository.deleteAllByPermissionStatus(permissionStatus);
         }catch(Exception e){
+            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -96,6 +99,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionRepository.save(question);
             
         }catch(Exception e){
+            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -105,8 +109,9 @@ public class QuestionServiceImpl implements QuestionService {
     public void addQuestion(Question question){
         try{
             this.questionRepository.save(question);
-        }catch(Exception exception){
-            throw new IllegalArgumentException("Question already exists!");
+        }catch(Exception e){
+            System.out.println("Error: " + e);
+            e.printStackTrace();
         }   
     }
 }

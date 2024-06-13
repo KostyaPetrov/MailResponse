@@ -15,15 +15,15 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "text_question", nullable = false)
     private String textQuestion;
 
-    @Column(nullable = false)
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
-    @Column(nullable = false)
+    @Column(name = "count_review", nullable = false)
     private Integer countReview;
 
-    @Column(nullable = false)
+    @Column(name="permission_status", nullable = false)
     private PermissionStatus permissionStatus;
 }

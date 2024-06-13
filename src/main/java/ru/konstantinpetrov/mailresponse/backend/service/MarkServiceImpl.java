@@ -22,7 +22,8 @@ public class MarkServiceImpl implements MarkService {
         try{
             this.markRepository.save(mark);
         }catch(Exception exception){
-            throw new IllegalArgumentException("Client with current login is already exists!");
+            System.out.println("Error: " + exception);
+            exception.printStackTrace();
         }   
     }
 }
