@@ -20,7 +20,7 @@ public class MarkController {
     public void setMarkService(MarkService markService) {
         this.markService = markService;
     }
-
+    @Transactional
     @PostMapping(path="/addMark")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addMark(@RequestBody Mark mark) {

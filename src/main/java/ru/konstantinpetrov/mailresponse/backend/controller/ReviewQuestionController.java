@@ -61,6 +61,7 @@ public class ReviewQuestionController {
         }
 	}
 
+    @Transactional
     @PostMapping(path="/addResponse")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
@@ -80,7 +81,7 @@ public class ReviewQuestionController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @CrossOrigin
     @DeleteMapping(path="/deleteResponse/{userId}/{responseId}")
     @PreAuthorize("hasRole('MODERATOR')")

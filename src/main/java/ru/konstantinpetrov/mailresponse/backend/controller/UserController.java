@@ -48,7 +48,7 @@ public class UserController {
     }
 
     
-    	
+    @Transactional
 	@PostMapping(path="/addUser")
     @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addUser(@RequestBody GetUserDTO userDTO) {
@@ -69,7 +69,7 @@ public class UserController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @PostMapping(path="/addModerator")
     @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addModerator(@RequestBody GetUserDTO userDTO) {
@@ -91,7 +91,7 @@ public class UserController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @PostMapping(path="/changeBlockStatus/{changerId}/{userId}")
     @PreAuthorize("hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> changeBlockStatus(@PathVariable Long changerId, @PathVariable Long userId) {
@@ -99,7 +99,8 @@ public class UserController {
             System.out.println(changerId + " " + userId);
             Roles role=userService.getUserRole(changerId);
             if(role!=Roles.MODERATOR){
-                throw new Exception();    
+                return new ResponseEntity<>(new ResponseEnterDTO(false, "Пользователь является модератором"),
+                                    HttpStatus.BAD_REQUEST);
             }
 			userService.changeBlockStatus(userId);
             

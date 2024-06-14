@@ -55,7 +55,7 @@ public class QuestionController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @PostMapping(path="/addQuestion")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
 	public ResponseEntity<ResponseEnterDTO> addQuestion(@RequestBody Question question) {
@@ -91,7 +91,7 @@ public class QuestionController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @CrossOrigin
     @DeleteMapping(path="/deleteQuestionById/{userId}/{id}")
     @PreAuthorize("hasRole('MODERATOR')")
@@ -115,7 +115,7 @@ public class QuestionController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @CrossOrigin
     @DeleteMapping(path="/deleteQuestionByUserId/{userId}/{commentatorId}")
     @PreAuthorize("hasRole('MODERATOR')")
@@ -140,7 +140,7 @@ public class QuestionController {
         }
 	}
 
-
+    @Transactional
     @CrossOrigin
     @DeleteMapping(path="/deleteQuestionByPermissionStatus/{userId}/{permissionStatus}")
     @PreAuthorize("hasRole('MODERATOR')")
@@ -164,7 +164,7 @@ public class QuestionController {
                     HttpStatus.BAD_REQUEST);
         }
 	}
-
+    @Transactional
     @PostMapping("/changePermissionStatus/{userId}/{questionId}")
     @PreAuthorize("hasRole('MODERATOR')")
     public ResponseEntity<ResponseEnterDTO> changePermissionStatus(@PathVariable Long userId, @PathVariable Long questionId) {
