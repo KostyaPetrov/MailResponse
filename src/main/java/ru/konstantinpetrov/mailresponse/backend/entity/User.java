@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -34,5 +35,4 @@ public class User {
     public String getUsername() {
         return name;
     }
-
 }
