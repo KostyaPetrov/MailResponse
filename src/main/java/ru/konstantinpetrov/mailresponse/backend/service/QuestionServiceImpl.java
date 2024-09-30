@@ -14,6 +14,12 @@ import ru.konstantinpetrov.mailresponse.backend.repository.QuestionRepository;
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionRepository questionRepository;
+    private final KafkaProducerService kafkaProducerService;
+
+    public QuestionServiceImpl(QuestionRepository questionRepository, KafkaProducerService kafkaProducerService) {
+        this.questionRepository = questionRepository;
+        this.kafkaProducerService = kafkaProducerService;
+    }
 
     @Autowired
     public void setQuestionRepository(QuestionRepository questionRepository) {

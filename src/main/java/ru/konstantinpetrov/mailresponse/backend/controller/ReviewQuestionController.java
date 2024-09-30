@@ -68,10 +68,7 @@ public class ReviewQuestionController {
 	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
 		try {
             System.out.println(reviewQuestionDTO);
-            ReviewQuestion reviewQuestion=new ReviewQuestion();
-            reviewQuestion.setTextReview(reviewQuestionDTO.getTextReview());
-            reviewQuestion.setQuestionId(reviewQuestionDTO.getQuestionId());
-			reviewQuestionService.addReview(reviewQuestion);
+			reviewQuestionService.addReview(reviewQuestionDTO.getQuestionId(), reviewQuestionDTO.getUserId(), reviewQuestionDTO.getTextReview());//Long questionId, Long userId, String textReview
 			ResponseEnterDTO response=new ResponseEnterDTO(true, "Успешно");
 			return new ResponseEntity<>(response,
                  HttpStatus.OK);

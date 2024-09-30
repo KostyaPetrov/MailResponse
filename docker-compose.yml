@@ -1,0 +1,59 @@
+version: '3'
+services:
+  pg:
+    image: postgres:13
+    container_name: pg
+    environment:
+      POSTGRES_USER: s339742
+      POSTGRES_PASSWORD: eMgmoDoZhCcsWa62
+      POSTGRES_DB: studs
+    ports:
+      - "10433:5432"  # для хоста
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "22181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "29092:29092"
+    hostname: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+  app:
+    build: .
+    ports:
+      - "10234:10234"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/studs
+      SPRING_DATASOURCE_USERNAME: s339742
+      SPRING_DATASOURCE_PASSWORD: eMgmoDoZhCcsWa62
+      SPRING_DATASOURCE_DRIVERCLASSNAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JTA_ENABLED: true
+      SPRING_JTA_BITRONIX_DATASOURCE_ENABLED: true
+      BITRONIX_TM_SERVERID: myServer123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:29092
+      debug: true
+    depends_on:
+      - pg
+      - kafka
+
+volumes:
+  pgdata:

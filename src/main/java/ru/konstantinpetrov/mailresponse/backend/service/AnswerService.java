@@ -1,10 +1,7 @@
 package ru.konstantinpetrov.mailresponse.backend.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.entity.ReviewQuestion;
@@ -14,36 +11,18 @@ import ru.konstantinpetrov.mailresponse.backend.repository.ReviewRepository;
 import ru.konstantinpetrov.mailresponse.backend.repository.UserRepository;
 
 @Service
-public class ReviewQuestionServiceImpl implements ReviewQuestionService{
+public class AnswerService {
 
-    private ReviewRepository reviewRepository;
     @Autowired
-    private KafkaProducerService kafkaProducerService;
+    private QuestionRepository questionRepository;
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
-    private QuestionRepository questionRepository;
+    private KafkaProducerService kafkaProducerService;
     @Autowired
-    public void setReviewRepository(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
-    }
-
-
-    @Override
-    public List<ReviewQuestion> getReview(Long id){
-        // System.out.println("In getReview method");
-        // this.reviewRepository.findByQuestionId(id);
-        // System.out.println("Test get responce");
-
-        List<ReviewQuestion> listReview = this.reviewRepository.findByQuestionId(id);
-        // System.out.println("Test save responce");
-
-        return listReview;
-        
-    }
-
-    @Override
+    private ReviewRepository reviewRepository;
     @Transactional
     public void addReview(Long questionId, Long userId, String textReview) {
         // Проверяем, что вопрос существует
@@ -67,16 +46,5 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
         // Отправляем сообщения через Kafka
         kafkaProducerService.sendAnswerAddedToQuestionMessage(questionId);
         kafkaProducerService.sendAnswerAddedToUserMessage(userId);
-    }
-
-
-    @Override
-    public void deleteResponseByQuestionId(Long id){
-        try{
-            this.reviewRepository.deleteAllById(id);
-        }catch(Exception e){
-            System.out.println("Error: " + e);
-            e.printStackTrace();
-        }
     }
 }

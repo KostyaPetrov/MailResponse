@@ -9,4 +9,6 @@ public class ReviewQuestionDTO {
     private String textReview; 
 
     private Long questionId;
+
+    private Long userId;
 }

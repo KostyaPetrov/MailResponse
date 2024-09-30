@@ -8,8 +8,7 @@ public interface ReviewQuestionService {
     List<ReviewQuestion> getReview(Long id);
 
     // void getReview(Long id);
-
-    void addReview(ReviewQuestion reviewQuestion);
+    void addReview(Long questionId, Long userId, String textReview);
 
     void deleteResponseByQuestionId(Long id);
 }

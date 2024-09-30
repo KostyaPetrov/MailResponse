@@ -32,6 +32,8 @@ public class User {
     @Column(name = "block_status", nullable = false)
     private BlockStatus blockStatus;
 
+    @Column(nullable = false)
+    private int answerCount;
     public String getUsername() {
         return name;
     }
