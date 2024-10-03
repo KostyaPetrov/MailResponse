@@ -11,5 +11,6 @@ public interface ReviewRepository extends JpaRepository<ReviewQuestion, Long> {
     // Optional<ReviewQuestion> findAllByQuestionId(Long id);
     // List<ReviewQuestion> findAllByQuestionId(Long id);
     List<ReviewQuestion> findByQuestionId(Long id);
+    void deleteByQuestionId(Long questionId);
     void deleteAllById(Long id);
 }

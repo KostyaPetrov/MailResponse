@@ -9,4 +9,6 @@ import ru.konstantinpetrov.mailresponse.backend.entity.User;
 public interface EmailRepository extends JpaRepository<Email, Long> {
     User findByEmail(String email);
     Email findByUser(User user);
+
+    void deleteByUser(User user);
 }

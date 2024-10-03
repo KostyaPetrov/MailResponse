@@ -17,4 +17,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     void deleteAllByUserId(long userId);
 
     void deleteAllByPermissionStatus(PermissionStatus permissionStatus);
+    void deleteByUserId(Long userId);
+
+    List<Long> findAllByUserId(long userId);
 }

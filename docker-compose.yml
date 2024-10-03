@@ -35,25 +35,83 @@ services:
     depends_on:
       - zookeeper
 
-  app:
+  app1:
     build: .
+    container_name: app1
     ports:
-      - "10234:10234"
+      - "10236:10236"
     environment:
+      # Порт работы сервера
+      SERVER_PORT: 10236
+
+      # Настройки базы данных
       SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/studs
       SPRING_DATASOURCE_USERNAME: s339742
       SPRING_DATASOURCE_PASSWORD: eMgmoDoZhCcsWa62
       SPRING_DATASOURCE_DRIVERCLASSNAME: org.postgresql.Driver
+
+      # JPA и Hibernate
+      SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
-      SPRING_JTA_ENABLED: true
-      SPRING_JTA_BITRONIX_DATASOURCE_ENABLED: true
+
+      # JTA и Bitronix
+      SPRING_JTA_ENABLED: "true"
+      SPRING_JTA_BITRONIX_DATASOURCE_ENABLED: "true"
       BITRONIX_TM_SERVERID: myServer123
+      BITRONIX_TM_JOURNAL_DISK_LOGPART1FILENAME: btm1.tlog
+      BITRONIX_TM_JOURNAL_DISK_LOGPART2FILENAME: btm2.tlog
+      BITRONIX_TM_RESOURCE_CONFIGURATIONFILE: bitronix-resources.properties
+
+      # Настройки Kafka
       SPRING_KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:29092
-      debug: true
     depends_on:
       - pg
       - kafka
 
+  app2:
+    build: .
+    container_name: app2
+    ports:
+      - "10235:10235"
+    environment:
+      # Порт работы сервера
+      SERVER_PORT: 10235
+
+      # Настройки базы данных
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/studs
+      SPRING_DATASOURCE_USERNAME: s339742
+      SPRING_DATASOURCE_PASSWORD: eMgmoDoZhCcsWa62
+      SPRING_DATASOURCE_DRIVERCLASSNAME: org.postgresql.Driver
+
+      # JPA и Hibernate
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+
+      # JTA и Bitronix
+      SPRING_JTA_ENABLED: "true"
+      SPRING_JTA_BITRONIX_DATASOURCE_ENABLED: "true"
+      BITRONIX_TM_SERVERID: myServer124
+      BITRONIX_TM_JOURNAL_DISK_LOGPART1FILENAME: btm1.tlog
+      BITRONIX_TM_JOURNAL_DISK_LOGPART2FILENAME: btm2.tlog
+      BITRONIX_TM_RESOURCE_CONFIGURATIONFILE: bitronix-resources.properties
+
+      # Настройки Kafka
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:29092
+    depends_on:
+      - pg
+      - kafka
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "10234:10234" # Порт для балансировки
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
 volumes:
   pgdata:

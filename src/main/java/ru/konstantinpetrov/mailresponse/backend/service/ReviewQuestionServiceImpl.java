@@ -58,13 +58,7 @@ public class ReviewQuestionServiceImpl implements ReviewQuestionService{
         // Сохраняем ответ в базе данных
         reviewRepository.save(reviewQuestion);
 
-        // Обновляем количество ответов у пользователя
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setAnswerCount(user.getAnswerCount() + 1);
-        userRepository.save(user);
-
-        // Отправляем сообщения через Kafka
+        // Отправляем сообщения через Kafka (но больше не обновляем количество ответов здесь)
         kafkaProducerService.sendAnswerAddedToQuestionMessage(questionId);
         kafkaProducerService.sendAnswerAddedToUserMessage(userId);
     }
