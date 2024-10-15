@@ -65,7 +65,7 @@ public class ReviewQuestionController {
     @Transactional
     @PostMapping(path="/addResponse")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
-	public ResponseEntity<ResponseEnterDTO> getReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
+	public ResponseEntity<ResponseEnterDTO> addReviewQuestion(@RequestBody ReviewQuestionDTO reviewQuestionDTO) {
 		try {
             System.out.println(reviewQuestionDTO);
 			reviewQuestionService.addReview(reviewQuestionDTO.getQuestionId(), reviewQuestionDTO.getUserId(), reviewQuestionDTO.getTextReview());//Long questionId, Long userId, String textReview
@@ -89,7 +89,7 @@ public class ReviewQuestionController {
             Roles role=userService.getUserRole(userId);
             
             if(role!=Roles.MODERATOR){
-                throw new Exception();    
+                throw new Exception("Не достаточно прав");    
             }
 
 		    reviewQuestionService.deleteResponseByQuestionId(responseId);
