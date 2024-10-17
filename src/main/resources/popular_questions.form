@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "action": "submit",
+      "label": "show popular questions",
+      "type": "button",
+      "layout": {
+        "row": "Row_042mzju",
+        "columns": null
+      },
+      "id": "Field_1tqb5j2"
+    }
+  ],
+  "type": "default",
+  "id": "popular_questions",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}

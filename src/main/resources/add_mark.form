@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "label": "Rate",
+      "type": "number",
+      "layout": {
+        "row": "Row_1yjoec6",
+        "columns": null
+      },
+      "id": "Field_0axtq3y",
+      "key": "grade",
+      "increment": "1",
+      "validate": {
+        "min": 0,
+        "max": 10
+      }
+    },
+    {
+      "label": "Number questions",
+      "type": "number",
+      "layout": {
+        "row": "Row_0fr3go7",
+        "columns": null
+      },
+      "id": "Field_0gynbj9",
+      "key": "questionId",
+      "increment": "1"
+    }
+  ],
+  "type": "default",
+  "id": "add_mark",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}

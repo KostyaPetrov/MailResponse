@@ -17,14 +17,14 @@ public class CreateQuestionDelegate implements JavaDelegate{
     public void execute(DelegateExecution delegateExecution){
         String textQuestion = (String) delegateExecution.getVariable("textQuestion");
         long userId = (long) delegateExecution.getVariable("userId");
-        Integer countReview = (Integer) delegateExecution.getVariable("countReview");
-        PermissionStatus permissionStatus = (PermissionStatus) delegateExecution.getVariable("permissionStatus");
+        Integer countReview = 0;
+        // PermissionStatus permissionStatus;
 
 
         Question question = new Question();
         question.setUserId(userId);
         question.setCountReview(countReview);
-        question.setPermissionStatus(permissionStatus);
+        question.setPermissionStatus(PermissionStatus.OPEN);
         question.setTextQuestion(textQuestion);
         
         questionServiceImpl.addQuestion(question);
