@@ -1,0 +1,35 @@
+{
+  "components": [
+    {
+      "label": "your number",
+      "type": "number",
+      "layout": {
+        "row": "Row_1mytylc",
+        "columns": null
+      },
+      "id": "Field_1wv1pyw",
+      "key": "userId",
+      "increment": "1"
+    },
+    {
+      "label": "question number",
+      "type": "number",
+      "layout": {
+        "row": "Row_09ghbjx",
+        "columns": null
+      },
+      "id": "Field_1wzz216",
+      "key": "questionId",
+      "increment": "1"
+    }
+  ],
+  "type": "default",
+  "id": "delete_question",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}

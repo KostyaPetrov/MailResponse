@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Number review",
+      "type": "number",
+      "layout": {
+        "row": "Row_161d3by",
+        "columns": null
+      },
+      "id": "Field_0mmaez6",
+      "key": "reviewId"
+    }
+  ],
+  "type": "default",
+  "id": "show_answer",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}
