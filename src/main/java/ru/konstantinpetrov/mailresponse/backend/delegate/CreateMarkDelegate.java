@@ -9,7 +9,7 @@ import ru.konstantinpetrov.mailresponse.backend.entity.Mark;
 import ru.konstantinpetrov.mailresponse.backend.service.MarkService;
 
 @RequiredArgsConstructor
-public class CreateMark implements JavaDelegate {
+public class CreateMarkDelegate implements JavaDelegate {
 
     private MarkService markService;
 

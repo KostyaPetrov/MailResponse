@@ -69,6 +69,9 @@ public class AuthenticationController {
         if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
             return ResponseEntity.badRequest().body("Email is required");
         }
+        if (emailRepository.existsByEmail(userDTO.getEmail())) {
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
 
         try {
             User user = new User();

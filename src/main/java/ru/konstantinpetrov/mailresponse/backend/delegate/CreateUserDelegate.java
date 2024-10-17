@@ -2,14 +2,11 @@ package ru.konstantinpetrov.mailresponse.backend.delegate;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ResponseEnterDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.BlockStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
@@ -17,7 +14,7 @@ import ru.konstantinpetrov.mailresponse.backend.service.UserService;
 
 
 @RequiredArgsConstructor
-public class CreateUser implements JavaDelegate{
+public class CreateUserDelegate implements JavaDelegate{
     private PasswordEncoder passwordEncoder;
     private UserService userService;
 

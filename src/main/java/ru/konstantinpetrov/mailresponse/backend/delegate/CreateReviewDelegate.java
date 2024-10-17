@@ -2,15 +2,13 @@ package ru.konstantinpetrov.mailresponse.backend.delegate;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import lombok.RequiredArgsConstructor;
 import ru.konstantinpetrov.mailresponse.backend.service.ReviewQuestionService;
 
 
 @RequiredArgsConstructor
-public class CreateReview implements JavaDelegate {
+public class CreateReviewDelegate implements JavaDelegate {
 
     ReviewQuestionService reviewQuestionService;
 
