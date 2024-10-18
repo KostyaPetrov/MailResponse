@@ -16,6 +16,7 @@ public class AuthenticationDelegate implements JavaDelegate{
     private AuthenticationManager authenticationManager;
     private CustomUserDetailsService userDetailsService;
     private JwtUtil jwtUtil;
+    private Boolean isAuth;
 
 
     @Override
@@ -27,6 +28,8 @@ public class AuthenticationDelegate implements JavaDelegate{
                     new UsernamePasswordAuthenticationToken(userName, password)
             );
         } catch (BadCredentialsException e) {
+            isAuth=false;
+            delegateExecution.setVariable("isAuth", isAuth);
             throw new Exception("Incorrect username or password", e);
         }
 
@@ -34,6 +37,8 @@ public class AuthenticationDelegate implements JavaDelegate{
         final String jwt = jwtUtil.generateToken(userDetails);
 
         delegateExecution.setVariable("jwt", jwt);
+        isAuth=true;
+        delegateExecution.setVariable("isAuth", isAuth);
 
     }
 
