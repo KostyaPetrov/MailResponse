@@ -62,8 +62,8 @@
         <bpmn:flowNodeRef>Activity_0s2lxat</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1hbj4fm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1e3s63t</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1jmhnzl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_02vyeep</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1jmhnzl</bpmn:flowNodeRef>
         <bpmn:childLaneSet id="LaneSet_11cqpds">
           <bpmn:lane id="Lane_1j1glp7" name="Клиент">
             <bpmn:flowNodeRef>StartEvent_User</bpmn:flowNodeRef>
@@ -275,22 +275,6 @@
       <bpmn:outgoing>Flow_0ol029r</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_14fsnir" messageRef="Message_1l4apk4" />
     </bpmn:intermediateThrowEvent>
-    <bpmn:task id="Activity_1jmhnzl" name="Вернуться на стартовую страницу">
-      <bpmn:outgoing>Flow_1roio4f</bpmn:outgoing>
-      <bpmn:property id="Property_1gi1822" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_1fz0k2l">
-        <bpmn:sourceRef>DataStoreReference_0srbh68</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1gi1822</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataInputAssociation id="DataInputAssociation_1t5mumk">
-        <bpmn:sourceRef>DataStoreReference_161n1g9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1gi1822</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataInputAssociation id="DataInputAssociation_02fmxdl">
-        <bpmn:sourceRef>DataStore_QuestionRepository</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1gi1822</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:task>
     <bpmn:subProcess id="Activity_02vyeep">
       <bpmn:incoming>Flow_0efkszk</bpmn:incoming>
       <bpmn:outgoing>Flow_1u0uxz2</bpmn:outgoing>
@@ -330,7 +314,9 @@
       <bpmn:extensionElements />
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isAuth}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1cuzajy" sourceRef="Gateway_01cbwzl" targetRef="Gateway_0r55n6w" />
+    <bpmn:sequenceFlow id="Flow_1cuzajy" sourceRef="Gateway_01cbwzl" targetRef="Gateway_0r55n6w">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isReturn}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0cgau3i" sourceRef="Gateway_0r55n6w" targetRef="Gateway_108zgin" />
     <bpmn:sequenceFlow id="Flow_056m3wk" sourceRef="Gateway_0r55n6w" targetRef="Activity_05v0aom">
       <bpmn:extensionElements />
@@ -340,7 +326,9 @@
     <bpmn:sequenceFlow id="Flow_039sqnx" sourceRef="Activity_0v7ag3k" targetRef="Gateway_0wn2kdw" />
     <bpmn:sequenceFlow id="Flow_1lh27f2" sourceRef="Gateway_0wn2kdw" targetRef="Activity_0877wbq" />
     <bpmn:sequenceFlow id="Flow_0ku4bh0" sourceRef="Gateway_0wn2kdw" targetRef="Activity_1vdyl7s" />
-    <bpmn:sequenceFlow id="Flow_1xlpzrp" sourceRef="Gateway_01cbwzl" targetRef="EndEvent_User" />
+    <bpmn:sequenceFlow id="Flow_1xlpzrp" sourceRef="Gateway_01cbwzl" targetRef="EndEvent_User">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isReturn}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1roio4f" sourceRef="Activity_1jmhnzl" targetRef="Gateway_01cbwzl" />
     <bpmn:sequenceFlow id="Flow_1wcj5pu" sourceRef="Activity_06msox0" targetRef="Activity_14a9mv0" />
     <bpmn:sequenceFlow id="Flow_1wgtf8s" sourceRef="Activity_1qz1w98" targetRef="Activity_1bwmqyt" />
@@ -353,13 +341,28 @@
     <bpmn:sequenceFlow id="Flow_0efkszk" sourceRef="Task_Register_User" targetRef="Activity_02vyeep" />
     <bpmn:sequenceFlow id="Flow_1h3xs1l" sourceRef="Activity_0s2lxat" targetRef="Event_1e3s63t" />
     <bpmn:sequenceFlow id="Flow_0ol029r" sourceRef="Event_1e3s63t" targetRef="Event_1hbj4fm" />
+    <bpmn:userTask id="Activity_1jmhnzl" name="Вернуться на стартовую страницу" camunda:formRef="Is_Return_To_Start_Page" camunda:formRefBinding="latest">
+      <bpmn:outgoing>Flow_1roio4f</bpmn:outgoing>
+      <bpmn:property id="Property_0dq8ma0" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1fz0k2l">
+        <bpmn:sourceRef>DataStoreReference_0srbh68</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0dq8ma0</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="DataInputAssociation_1t5mumk">
+        <bpmn:sourceRef>DataStoreReference_161n1g9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0dq8ma0</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="DataInputAssociation_02fmxdl">
+        <bpmn:sourceRef>DataStore_QuestionRepository</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0dq8ma0</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="Process_Admin" name="Процесс администратора" isExecutable="true">
     <bpmn:laneSet id="LaneSet_Admin">
       <bpmn:lane id="Lane_Admin_Server">
         <bpmn:flowNodeRef>StartEvent_Admin</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_18zu6qq</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0y5i8xb</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1p5nacr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_Admin</bpmn:flowNodeRef>
@@ -378,8 +381,9 @@
         <bpmn:flowNodeRef>Activity_02r9yf1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1jgt2zt</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1g0x6aa</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1spaef2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1ah3qvm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1spaef2</bpmn:flowNodeRef>
         <bpmn:childLaneSet id="LaneSet_07ssbhp">
           <bpmn:lane id="Lane_0j1f7om" name="Клиент">
             <bpmn:flowNodeRef>StartEvent_Admin</bpmn:flowNodeRef>
@@ -398,7 +402,6 @@
           </bpmn:lane>
           <bpmn:lane id="Lane_1heybic" name="Сервер">
             <bpmn:flowNodeRef>Gateway_18zu6qq</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Event_0ip6u5m</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_1g8uft2</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_166tpiy</bpmn:flowNodeRef>
@@ -407,16 +410,17 @@
             <bpmn:flowNodeRef>Activity_02r9yf1</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_1jgt2zt</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_1ah3qvm</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
             <bpmn:childLaneSet id="LaneSet_1xl1tqx">
               <bpmn:lane id="Lane_1yj8hpl" name="Узел 1">
                 <bpmn:flowNodeRef>Gateway_18zu6qq</bpmn:flowNodeRef>
-                <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_1g8uft2</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_166tpiy</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_0nnc0ms</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_0rp70vv</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_02r9yf1</bpmn:flowNodeRef>
                 <bpmn:flowNodeRef>Activity_1ah3qvm</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Gateway_1hfoy3g</bpmn:flowNodeRef>
               </bpmn:lane>
               <bpmn:lane id="Lane_09r64se" name="Узел 2">
                 <bpmn:flowNodeRef>Event_0ip6u5m</bpmn:flowNodeRef>
@@ -435,12 +439,6 @@
       <bpmn:incoming>Flow_0ypjdsx</bpmn:incoming>
       <bpmn:outgoing>Flow_15r7nc3</bpmn:outgoing>
       <bpmn:outgoing>Flow_1fabydx</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_1hfoy3g">
-      <bpmn:incoming>Flow_1fabydx</bpmn:incoming>
-      <bpmn:incoming>Flow_1krq89p</bpmn:incoming>
-      <bpmn:outgoing>Flow_16lpbt2</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0q8tybv</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:dataStoreReference id="DataStoreReference_1urkxpl" name="Хранилище вопросов" />
     <bpmn:parallelGateway id="Gateway_0y5i8xb">
@@ -581,22 +579,6 @@
         <bpmn:targetRef>Property_0rqbbkg</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:task>
-    <bpmn:task id="Activity_1spaef2" name="Вернуться в панель разработчика">
-      <bpmn:outgoing>Flow_04q3fzj</bpmn:outgoing>
-      <bpmn:property id="Property_16w3imc" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0kgot16">
-        <bpmn:sourceRef>DataStoreReference_1v6t95s</bpmn:sourceRef>
-        <bpmn:targetRef>Property_16w3imc</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataInputAssociation id="DataInputAssociation_1i9g9we">
-        <bpmn:sourceRef>DataStoreReference_0b2dpv0</bpmn:sourceRef>
-        <bpmn:targetRef>Property_16w3imc</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataInputAssociation id="DataInputAssociation_1kotns1">
-        <bpmn:sourceRef>DataStoreReference_07ncv25</bpmn:sourceRef>
-        <bpmn:targetRef>Property_16w3imc</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0uffi19" sourceRef="StartEvent_Admin" targetRef="Activity_07d772h" />
     <bpmn:sequenceFlow id="Flow_0ypjdsx" sourceRef="Activity_1ah3qvm" targetRef="Gateway_18zu6qq" />
     <bpmn:sequenceFlow id="Flow_15r7nc3" sourceRef="Gateway_18zu6qq" targetRef="Activity_07d772h">
@@ -605,7 +587,9 @@
     <bpmn:sequenceFlow id="Flow_1fabydx" sourceRef="Gateway_18zu6qq" targetRef="Gateway_1hfoy3g">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isAuth}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1krq89p" sourceRef="Gateway_0o29avn" targetRef="Gateway_1hfoy3g" />
+    <bpmn:sequenceFlow id="Flow_1krq89p" sourceRef="Gateway_0o29avn" targetRef="Gateway_1hfoy3g">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isReturn}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_16lpbt2" sourceRef="Gateway_1hfoy3g" targetRef="Activity_12s8bio" />
     <bpmn:sequenceFlow id="Flow_0q8tybv" sourceRef="Gateway_1hfoy3g" targetRef="Activity_1d4py8e" />
     <bpmn:sequenceFlow id="Flow_0e1uxi8" sourceRef="Activity_1g0x6aa" targetRef="Gateway_0y5i8xb" />
@@ -613,7 +597,9 @@
     <bpmn:sequenceFlow id="Flow_0xd05yl" sourceRef="Gateway_0y5i8xb" targetRef="Activity_0crxxa9" />
     <bpmn:sequenceFlow id="Flow_17sfn1c" sourceRef="Gateway_1p5nacr" targetRef="Activity_152w198" />
     <bpmn:sequenceFlow id="Flow_0cug8k9" sourceRef="Gateway_1p5nacr" targetRef="Activity_1sfsssv" />
-    <bpmn:sequenceFlow id="Flow_0ib3pja" name="Нет" sourceRef="Gateway_0o29avn" targetRef="EndEvent_Admin" />
+    <bpmn:sequenceFlow id="Flow_0ib3pja" name="Нет" sourceRef="Gateway_0o29avn" targetRef="EndEvent_Admin">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isReturn}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_04q3fzj" sourceRef="Activity_1spaef2" targetRef="Gateway_0o29avn" />
     <bpmn:sequenceFlow id="Flow_0kftwzl" sourceRef="Event_0ip6u5m" targetRef="Activity_1jgt2zt" />
     <bpmn:sequenceFlow id="Flow_0jrn8zk" sourceRef="Activity_07d772h" targetRef="Activity_1ah3qvm" />
@@ -622,6 +608,28 @@
     <bpmn:sequenceFlow id="Flow_1nzaxp6" sourceRef="Activity_0crxxa9" targetRef="Activity_0nnc0ms" />
     <bpmn:sequenceFlow id="Flow_02y8kd2" sourceRef="Activity_152w198" targetRef="Activity_0rp70vv" />
     <bpmn:sequenceFlow id="Flow_1axcu8f" sourceRef="Activity_1sfsssv" targetRef="Activity_02r9yf1" />
+    <bpmn:parallelGateway id="Gateway_1hfoy3g">
+      <bpmn:incoming>Flow_1fabydx</bpmn:incoming>
+      <bpmn:incoming>Flow_1krq89p</bpmn:incoming>
+      <bpmn:outgoing>Flow_16lpbt2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0q8tybv</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="Activity_1spaef2" name="Вернуться в панель разработчика" camunda:formRef="Is_Return_To_Start_Page" camunda:formRefBinding="latest">
+      <bpmn:outgoing>Flow_04q3fzj</bpmn:outgoing>
+      <bpmn:property id="Property_03hifip" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0kgot16">
+        <bpmn:sourceRef>DataStoreReference_1v6t95s</bpmn:sourceRef>
+        <bpmn:targetRef>Property_03hifip</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="DataInputAssociation_1i9g9we">
+        <bpmn:sourceRef>DataStoreReference_0b2dpv0</bpmn:sourceRef>
+        <bpmn:targetRef>Property_03hifip</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="DataInputAssociation_1kotns1">
+        <bpmn:sourceRef>DataStoreReference_07ncv25</bpmn:sourceRef>
+        <bpmn:targetRef>Property_03hifip</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_1l4apk4" name="Message_1l4apk4" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_Full">
@@ -786,7 +794,7 @@
           <dc:Bounds x="1766" y="545" width="62" height="53" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1068m7v_di" bpmnElement="Activity_1jmhnzl">
+      <bpmndi:BPMNShape id="Activity_1gqm9fg_di" bpmnElement="Activity_1jmhnzl">
         <dc:Bounds x="2230" y="265" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_02vyeep_di" bpmnElement="Activity_02vyeep" isExpanded="true">
@@ -981,9 +989,6 @@
           <dc:Bounds x="943" y="2152" width="65" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1hfoy3g_di" bpmnElement="Gateway_1hfoy3g" isMarkerVisible="true">
-        <dc:Bounds x="950" y="1955" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_1urkxpl_di" bpmnElement="DataStoreReference_1urkxpl">
         <dc:Bounds x="1140" y="2075" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -1086,6 +1091,12 @@
       <bpmndi:BPMNShape id="Activity_0yrz77s_di" bpmnElement="Activity_1jgt2zt">
         <dc:Bounds x="1145" y="2230" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0amzf28_di" bpmnElement="Gateway_1hfoy3g">
+        <dc:Bounds x="950" y="1955" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1aqrjzh_di" bpmnElement="Activity_1spaef2">
+        <dc:Bounds x="1805" y="1778" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ah3qvm_di" bpmnElement="Activity_1ah3qvm" isExpanded="true">
         <dc:Bounds x="315" y="1920" width="480" height="260" />
       </bpmndi:BPMNShape>
@@ -1128,9 +1139,6 @@
       <bpmndi:BPMNShape id="Activity_1ckishr_di" bpmnElement="Activity_1g0x6aa">
         <dc:Bounds x="1255" y="1800" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1oynzx7_di" bpmnElement="Activity_1spaef2">
-        <dc:Bounds x="1805" y="1778" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0uffi19_di" bpmnElement="Flow_0uffi19">
         <di:waypoint x="363" y="1818" />
         <di:waypoint x="415" y="1818" />
@@ -1157,8 +1165,9 @@
         <di:waypoint x="1000" y="1980" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16lpbt2_di" bpmnElement="Flow_16lpbt2">
-        <di:waypoint x="988" y="1968" />
-        <di:waypoint x="1063" y="1899" />
+        <di:waypoint x="975" y="1955" />
+        <di:waypoint x="975" y="1860" />
+        <di:waypoint x="1055" y="1860" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0q8tybv_di" bpmnElement="Flow_0q8tybv">
         <di:waypoint x="975" y="1955" />
