@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,12 @@ import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.repository.EmailRepository;
 import ru.konstantinpetrov.mailresponse.backend.repository.UserRepository;
 
-
+@Component
 @RequiredArgsConstructor
 public class RegisterUserDelegate implements JavaDelegate{
-    private PasswordEncoder passwordEncoder;
-    private UserRepository userRepository;
-    private EmailRepository emailRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final EmailRepository emailRepository;
 
     @Transactional 
     @Override
