@@ -13,6 +13,7 @@ import java.io.IOException;
 public class CamundaConfiguration {
 
     private static final String BPMN_PATH = "classpath:/bpmn/*.bpmn";
+    private static final String FORM_PATH = "classpath:/forms/*.form"; // Добавили путь для форм
 
     private final RepositoryService repositoryService;
 
@@ -22,20 +23,28 @@ public class CamundaConfiguration {
     }
 
     /**
-     * Automatically deploy all BPMN processes at application startup.
+     * Automatically deploy all BPMN processes and forms at application startup.
      */
     @PostConstruct
-    public void deployProcesses() throws IOException {
+    public void deployProcessesAndForms() throws IOException {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources(BPMN_PATH);
+        Resource[] bpmnResources = resolver.getResources(BPMN_PATH);
+        Resource[] formResources = resolver.getResources(FORM_PATH); // Добавили поиск форм
 
         DeploymentBuilder deploymentBuilder = repositoryService.createDeployment()
                 .name("Auto-deployment");
 
-        for (Resource resource : resources) {
+        // Добавляем все BPMN файлы в деплой
+        for (Resource resource : bpmnResources) {
             deploymentBuilder.addInputStream(resource.getFilename(), resource.getInputStream());
         }
 
+        // Добавляем все формы в деплой
+        for (Resource resource : formResources) {
+            deploymentBuilder.addInputStream(resource.getFilename(), resource.getInputStream());
+        }
+
+        // Выполняем деплой
         deploymentBuilder.deploy();
     }
 }
