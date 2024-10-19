@@ -13,7 +13,7 @@ import java.io.IOException;
 public class CamundaConfiguration {
 
     private static final String BPMN_PATH = "classpath:/bpmn/*.bpmn";
-    private static final String FORM_PATH = "classpath:/forms/*.form"; // Добавили путь для форм
+    private static final String FORM_PATH = "classpath:/*.form"; // Добавили путь для форм
 
     private final RepositoryService repositoryService;
 
