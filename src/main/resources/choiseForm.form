@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "action": "submit",
+      "label": "Прочитать",
+      "type": "button",
+      "layout": {
+        "row": "Row_0a4ypv0",
+        "columns": null
+      },
+      "id": "Field_06w4iht",
+      "properties": {
+        "isWrite": "true"
+      }
+    },
+    {
+      "action": "submit",
+      "label": "Написать",
+      "type": "button",
+      "layout": {
+        "row": "Row_1sp4vzh",
+        "columns": null
+      },
+      "id": "Field_1lnyd5m",
+      "properties": {
+        "isWrite": "false"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "choiseForm",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}

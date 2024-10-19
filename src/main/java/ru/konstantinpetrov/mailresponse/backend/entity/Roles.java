@@ -8,5 +8,4 @@ import java.util.Iterator;
 public enum Roles{
     USER,
     MODERATOR;
-
 }
