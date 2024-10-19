@@ -4,14 +4,15 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.entity.PermissionStatus;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.service.QuestionServiceImpl;
 
-
+@Component
 @RequiredArgsConstructor
 public class CreateQuestionDelegate implements JavaDelegate{
-    private QuestionServiceImpl questionServiceImpl;
+    private final QuestionServiceImpl questionServiceImpl;
 
     @Override
     public void execute(DelegateExecution delegateExecution){

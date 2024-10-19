@@ -7,13 +7,14 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.service.QuestionService;
 
-
+@Component
 @RequiredArgsConstructor
 public class GetQuestionDelegate implements JavaDelegate {
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     @Override

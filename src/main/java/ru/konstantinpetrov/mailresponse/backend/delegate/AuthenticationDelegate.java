@@ -8,15 +8,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.jwt.JwtUtil;
 import ru.konstantinpetrov.mailresponse.backend.service.CustomUserDetailsService;
-
+@Component
 @RequiredArgsConstructor
 public class AuthenticationDelegate implements JavaDelegate{
-    private AuthenticationManager authenticationManager;
-    private CustomUserDetailsService userDetailsService;
-    private JwtUtil jwtUtil;
-    private Boolean isAuth;
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
+    private  Boolean isAuth;
 
 
     @Override

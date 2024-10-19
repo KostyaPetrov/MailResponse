@@ -9,15 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ResponseReviewQuestionDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.ReviewQuestion;
 import ru.konstantinpetrov.mailresponse.backend.service.ReviewQuestionService;
 
 
-
+@Component
 @RequiredArgsConstructor
 public class GetReviewQuestionDelegate implements JavaDelegate{
-    ReviewQuestionService reviewQuestionService;
+    private final ReviewQuestionService reviewQuestionService;
 
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     @Override

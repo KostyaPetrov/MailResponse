@@ -9,16 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.dtoLayer.ResponseUserDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.service.QuestionService;
 import ru.konstantinpetrov.mailresponse.backend.service.UserService;
 
-
+@Component
 @RequiredArgsConstructor
 public class FindUserDelegate implements JavaDelegate {
-    private UserService userService;
-    private QuestionService questionService;
+    private final UserService userService;
+    private final QuestionService questionService;
 
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     @Override

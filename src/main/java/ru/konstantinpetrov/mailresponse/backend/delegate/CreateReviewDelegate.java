@@ -4,13 +4,14 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.konstantinpetrov.mailresponse.backend.service.ReviewQuestionService;
 
-
+@Component
 @RequiredArgsConstructor
 public class CreateReviewDelegate implements JavaDelegate {
 
-    ReviewQuestionService reviewQuestionService;
+    private final ReviewQuestionService reviewQuestionService;
 
 
     @Override
