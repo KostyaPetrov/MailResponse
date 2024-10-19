@@ -8,7 +8,7 @@
         "columns": null
       },
       "id": "Field_0baku40",
-      "key": "auth_name",
+      "key": "userName",
       "description": "Enter your name"
     },
     {
@@ -19,17 +19,7 @@
         "columns": null
       },
       "id": "Field_096229k",
-      "key": "auth_password"
-    },
-    {
-      "label": "Mail",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_1djq21y",
-        "columns": null
-      },
-      "id": "Field_0jp1wfn",
-      "key": "auth_mail"
+      "key": "password"
     }
   ],
   "type": "default",
