@@ -3,26 +3,26 @@
     {
       "values": [
         {
-          "label": "Finish",
-          "value": "true"
+          "label": "View all questions",
+          "value": "all_questions"
         },
         {
-          "label": "Not finish",
-          "value": "false"
+          "label": "View list of popular questions",
+          "value": "popular_questions"
         }
       ],
-      "label": "Finish process?",
+      "label": "Select way",
       "type": "select",
       "layout": {
-        "row": "Row_13ikyyv",
+        "row": "Row_1wccmej",
         "columns": null
       },
-      "id": "Field_0ofru9f",
-      "key": "isFinish"
+      "id": "Field_1y2o26g",
+      "key": "selector3"
     }
   ],
   "type": "default",
-  "id": "is_return_to_start_page",
+  "id": "selector3_form",
   "executionPlatform": "Camunda Cloud",
   "executionPlatformVersion": "8.6.0",
   "exporter": {

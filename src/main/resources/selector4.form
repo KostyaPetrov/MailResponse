@@ -1,0 +1,37 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Add/Block User/Moderator",
+          "value": "add_block"
+        },
+        {
+          "label": "Delete question",
+          "value": "delete_questions"
+        },
+        {
+          "label": "Delete reply",
+          "value": "delete_reply"
+        }
+      ],
+      "label": "Select way",
+      "type": "select",
+      "layout": {
+        "row": "Row_1lf8qfg",
+        "columns": null
+      },
+      "id": "Field_0qgbjae",
+      "key": "selector4"
+    }
+  ],
+  "type": "default",
+  "id": "selector4_form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}

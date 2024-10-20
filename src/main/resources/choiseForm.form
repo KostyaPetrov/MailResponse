@@ -1,34 +1,35 @@
 {
   "components": [
     {
-      "action": "submit",
-      "label": "Прочитать",
-      "type": "button",
+      "values": [
+        {
+          "label": "Write questions",
+          "value": "write"
+        },
+        {
+          "label": "View all questions",
+          "value": "all_questions"
+        },
+        {
+          "label": "View list of popular questions",
+          "value": "popular_questions"
+        }
+      ],
+      "label": "Select next action",
+      "type": "select",
       "layout": {
-        "row": "Row_0a4ypv0",
+        "row": "Row_0xs0mk0",
         "columns": null
       },
-      "id": "Field_06w4iht",
-      "properties": {
-        "isWrite": "true"
-      }
-    },
-    {
-      "action": "submit",
-      "label": "Написать",
-      "type": "button",
-      "layout": {
-        "row": "Row_1sp4vzh",
-        "columns": null
-      },
-      "id": "Field_1lnyd5m",
-      "properties": {
-        "isWrite": "false"
+      "id": "Field_0csy7ts",
+      "key": "selector",
+      "validate": {
+        "required": false
       }
     }
   ],
   "type": "default",
-  "id": "choiseForm",
+  "id": "select_way",
   "executionPlatform": "Camunda Cloud",
   "executionPlatformVersion": "8.6.0",
   "exporter": {
