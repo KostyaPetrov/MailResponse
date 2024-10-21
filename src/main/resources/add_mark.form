@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "label": "Rate",
+      "label": "Grade",
       "type": "number",
       "layout": {
         "row": "Row_1yjoec6",
