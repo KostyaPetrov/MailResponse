@@ -26,15 +26,20 @@ public class DeleteQuestionByIdDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         
-        Long userId = (Long) delegateExecution.getVariable("userId");
-        Long questionId = (Long) delegateExecution.getVariable("questionId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
+        Integer questionId = (Integer) delegateExecution.getVariable("questionId");
+
+        Long fieldUserId = Long.valueOf(userId);
+        Long fieldQuestionId = Long.valueOf(questionId);
+
+
         try {
             
-            Roles role=userService.getUserRole(userId);
+            Roles role=userService.getUserRole(fieldUserId);
             if(role!=Roles.MODERATOR){
                 throw new Exception("Права на удаление имеет только модератор");
             }
-			questionService.deleteQuestionById(questionId);
+			questionService.deleteQuestionById(fieldQuestionId);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }

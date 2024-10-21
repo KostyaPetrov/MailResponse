@@ -22,17 +22,20 @@ public class DeleteResponseByIdDelegate implements JavaDelegate {
     @PreAuthorize("hasRole('MODERATOR')")
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long userId = (Long) delegateExecution.getVariable("userId");
-        Long responseId = (Long) delegateExecution.getVariable("responseId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
+        Integer responseId = (Integer) delegateExecution.getVariable("responseId");
+
+        Long fieldUserId = Long.valueOf(userId);
+        Long fieldResponseId = Long.valueOf(responseId);
 
         try {
-            Roles role=userService.getUserRole(userId);
+            Roles role=userService.getUserRole(fieldUserId);
             
             if(role!=Roles.MODERATOR){
                 throw new Exception("Нет прав на это действие");    
             }
 
-		    reviewQuestionService.deleteResponseByQuestionId(responseId);
+		    reviewQuestionService.deleteResponseByQuestionId(fieldResponseId);
             
         } catch (Exception e) {
             System.out.println("Error: " + e);

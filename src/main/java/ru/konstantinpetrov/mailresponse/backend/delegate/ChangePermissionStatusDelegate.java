@@ -25,14 +25,17 @@ public class ChangePermissionStatusDelegate implements JavaDelegate{
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         try {
-            Long userId=(Long) delegateExecution.getVariable("userId");
-            Long questionId = (Long) delegateExecution.getVariable("questionId");
+            Integer userId=(Integer) delegateExecution.getVariable("userId");
+            Integer questionId = (Integer) delegateExecution.getVariable("questionId");
 
-            Roles role=userService.getUserRole(userId);
+            Long fieldUserId = Long.valueOf(userId);
+            Long fieldQuestionId = Long.valueOf(questionId);
+
+            Roles role=userService.getUserRole(fieldUserId);
             if(role!=Roles.MODERATOR){
                 throw new Exception("Права на изменение статуса доступа имеет только модератор");
             }
-			questionService.changePermissionStatus(questionId);
+			questionService.changePermissionStatus(fieldQuestionId);
 			
         } catch (Exception e) {
             System.out.println("Error: " + e);

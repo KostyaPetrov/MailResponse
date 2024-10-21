@@ -16,13 +16,16 @@ public class CreateReviewDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long userId = (Long) delegateExecution.getVariable("userId");
-        Long questionId = (Long) delegateExecution.getVariable("questionId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
+        Integer questionId = (Integer) delegateExecution.getVariable("questionId");
         String textReview = (String) delegateExecution.getVariable("textReview");
+
+        Long fieldUserId = Long.valueOf(userId);
+        Long fieldQuestionId = Long.valueOf(questionId);
 
         try {
             // Вызываем сервис для добавления нового отзыва
-            reviewQuestionService.addReview(questionId, userId, textReview);
+            reviewQuestionService.addReview(fieldQuestionId, fieldUserId, textReview);
             
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e);

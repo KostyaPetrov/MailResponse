@@ -22,10 +22,13 @@ public class UpdateQuestionReviewCountDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long questionId = (Long) delegateExecution.getVariable("questionId");
+        Integer questionId = (Integer) delegateExecution.getVariable("questionId");
+
+        Long fieldQuestionId = Long.valueOf(questionId);
+
         logger.info("Updating review count for question with ID: {}", questionId);
 
-        Question question = questionRepository.findById(questionId)
+        Question question = questionRepository.findById(fieldQuestionId)
                 .orElseThrow(() -> new IllegalArgumentException("Question not found"));
 
         question.setCountReview(question.getCountReview() + 1);

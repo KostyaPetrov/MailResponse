@@ -23,11 +23,13 @@ public class GetReviewQuestionDelegate implements JavaDelegate{
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long reviewId = (Long) delegateExecution.getVariable("reviewId");
+        Integer reviewId = (Integer) delegateExecution.getVariable("reviewId");
+
+        Long fieldReviewId = Long.valueOf(reviewId);
         
         
         try {
-			List<ReviewQuestion> responseList = reviewQuestionService.getReview(reviewId);
+			List<ReviewQuestion> responseList = reviewQuestionService.getReview(fieldReviewId);
 			delegateExecution.setVariable("listReview", responseList);
            
         } catch (Exception e) {

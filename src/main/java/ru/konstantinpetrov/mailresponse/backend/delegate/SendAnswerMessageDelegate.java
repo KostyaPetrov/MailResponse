@@ -11,10 +11,14 @@ public class SendAnswerMessageDelegate implements JavaDelegate{
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long questionId = (Long) delegateExecution.getVariable("questionId");
-        Long userId = (Long) delegateExecution.getVariable("userId");
-        kafkaProducerService.sendAnswerAddedToQuestionMessage(questionId);
-        kafkaProducerService.sendAnswerAddedToUserMessage(userId);
+        Integer questionId = (Integer) delegateExecution.getVariable("questionId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
+
+        Long fieldUserId = Long.valueOf(userId);
+        Long fieldQuestionId = Long.valueOf(questionId);
+
+        kafkaProducerService.sendAnswerAddedToQuestionMessage(fieldQuestionId);
+        kafkaProducerService.sendAnswerAddedToUserMessage(fieldUserId);
 
     }
 

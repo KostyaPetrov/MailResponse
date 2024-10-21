@@ -20,16 +20,19 @@ public class ChangeBlockStatusDelegate implements JavaDelegate{
     @PreAuthorize("hasRole('MODERATOR')")
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long changerId = (Long) delegateExecution.getVariable("changerId");
-        Long userId = (Long) delegateExecution.getVariable("userId");
+        Integer changerId = (Integer) delegateExecution.getVariable("changerId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
+
+        Long fieldChangerId = Long.valueOf(changerId);
+        Long fieldUserId = Long.valueOf(userId);
 
         try {
             System.out.println(changerId + " " + userId);
-            Roles role=userService.getUserRole(changerId);
+            Roles role=userService.getUserRole(fieldChangerId);
             if(role!=Roles.MODERATOR){
                 throw new Exception("Не достаточно прав");    
             }
-			userService.changeBlockStatus(userId);
+			userService.changeBlockStatus(fieldUserId);
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
