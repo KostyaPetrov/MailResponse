@@ -1,0 +1,27 @@
+{
+  "components": [
+    {
+      "label": "Text",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0g3i1qx",
+        "columns": null
+      },
+      "id": "Field_1eafe4g",
+      "key": "priner_answer",
+      "properties": {},
+      "readonly": true,
+      "disabled": true,
+      "defaultValue": "listReview"
+    }
+  ],
+  "type": "default",
+  "id": "print_answer_form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}
