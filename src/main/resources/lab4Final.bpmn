@@ -64,7 +64,6 @@
         <bpmn:flowNodeRef>Activity_1vvn6a2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1lwmqy4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_05o1cp7</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_19jgl00</bpmn:flowNodeRef>
         <bpmn:childLaneSet id="LaneSet_11cqpds">
           <bpmn:lane id="Lane_1bpt7pm" name="Сервер">
             <bpmn:flowNodeRef>Activity_1bwmqyt</bpmn:flowNodeRef>
@@ -116,7 +115,6 @@
             <bpmn:flowNodeRef>Activity_0blnwov</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_0v7ag3k</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Activity_1lwmqy4</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>Activity_19jgl00</bpmn:flowNodeRef>
           </bpmn:lane>
         </bpmn:childLaneSet>
       </bpmn:lane>
@@ -357,7 +355,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:userTask id="Activity_1lwmqy4" name="Поставить оценку ответу" camunda:formRef="add_mark" camunda:formRefBinding="deployment">
-      <bpmn:incoming>Flow_14a0sz2</bpmn:incoming>
+      <bpmn:incoming>Flow_1ttonju</bpmn:incoming>
       <bpmn:outgoing>Flow_0k1prx6</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:dataStoreReference id="DataStore_QuestionRepository" name="Хранилище ответов" />
@@ -369,12 +367,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:dataStoreReference id="DataStoreReference_0opedwe" name="Хранилище ответов" />
-    <bpmn:sequenceFlow id="Flow_1ttonju" sourceRef="Activity_05o1cp7" targetRef="Activity_19jgl00" />
-    <bpmn:userTask id="Activity_19jgl00" name="Вывод ответов" camunda:formRef="print_answer_form" camunda:formRefBinding="deployment">
-      <bpmn:incoming>Flow_1ttonju</bpmn:incoming>
-      <bpmn:outgoing>Flow_14a0sz2</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_14a0sz2" sourceRef="Activity_19jgl00" targetRef="Activity_1lwmqy4" />
+    <bpmn:sequenceFlow id="Flow_1ttonju" sourceRef="Activity_05o1cp7" targetRef="Activity_1lwmqy4" />
   </bpmn:process>
   <bpmn:process id="Process_Admin" name="Процесс администратора" isExecutable="true">
     <bpmn:laneSet id="LaneSet_Admin">
@@ -875,10 +868,6 @@
           <dc:Bounds x="1401" y="588" width="59" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1tyse2u_di" bpmnElement="Activity_19jgl00">
-        <dc:Bounds x="1460" y="96" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_17kbyk7_di" bpmnElement="Flow_17kbyk7">
         <di:waypoint x="241" y="276" />
         <di:waypoint x="295" y="276" />
@@ -1039,10 +1028,7 @@
       <bpmndi:BPMNEdge id="Flow_1ttonju_di" bpmnElement="Flow_1ttonju">
         <di:waypoint x="1480" y="446" />
         <di:waypoint x="1510" y="446" />
-        <di:waypoint x="1510" y="176" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_14a0sz2_di" bpmnElement="Flow_14a0sz2">
-        <di:waypoint x="1560" y="136" />
+        <di:waypoint x="1510" y="136" />
         <di:waypoint x="1590" y="136" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_Admin_di" bpmnElement="Participant_Admin" isHorizontal="true">
