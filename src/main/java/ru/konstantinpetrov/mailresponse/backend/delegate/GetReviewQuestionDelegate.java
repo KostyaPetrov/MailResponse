@@ -30,7 +30,6 @@ public class GetReviewQuestionDelegate implements JavaDelegate{
             Long fieldReviewId = Long.valueOf(reviewId);
             List<ReviewQuestion> responseList = reviewQuestionService.getReview(fieldReviewId);
 
-            // Преобразуем список ReviewQuestion в список ReviewQuestionDTO
             List<ReviewQuestionDTO> listReviewDTO = responseList.stream()
                     .map(reviewQuestion -> {
                         ReviewQuestionDTO dto = new ReviewQuestionDTO();

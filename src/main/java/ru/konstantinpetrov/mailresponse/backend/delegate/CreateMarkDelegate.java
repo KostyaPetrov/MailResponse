@@ -18,7 +18,7 @@ public class CreateMarkDelegate implements JavaDelegate {
     @Transactional
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long userId = (Long) delegateExecution.getVariable("userId");
+        Integer userId = (Integer) delegateExecution.getVariable("userId");
         Integer questionId = (Integer) delegateExecution.getVariable("questionId");
         Integer grade = (Integer) delegateExecution.getVariable("grade");
 
