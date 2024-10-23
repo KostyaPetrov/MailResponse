@@ -6,9 +6,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import ru.konstantinpetrov.mailresponse.backend.entity.Roles;
 import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.jwt.JwtUtil;
 import ru.konstantinpetrov.mailresponse.backend.service.CustomUserDetailsService;
@@ -16,7 +17,8 @@ import ru.konstantinpetrov.mailresponse.backend.service.UserService;
 
 @Component
 @RequiredArgsConstructor
-public class AuthenticationDelegate implements JavaDelegate{
+public class AuthenticationModeratorDelegate implements JavaDelegate {
+
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
@@ -51,6 +53,14 @@ public class AuthenticationDelegate implements JavaDelegate{
         User user = userService.findUser(userName);
         // Сохраняем ID пользователя в переменной Camunda
         delegateExecution.setVariable("userId", user.getUserId());
+
+        if(user.getRole() == Roles.MODERATOR){
+            delegateExecution.setVariable("moderatorRoleApprove", true);
+            
+        }else{
+            delegateExecution.setVariable("moderatorRoleApprove", false);
+            throw new Exception("Permission denied");
+        }
     }
 
 }
