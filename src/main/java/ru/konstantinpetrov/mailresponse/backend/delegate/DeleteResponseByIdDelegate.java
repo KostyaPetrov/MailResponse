@@ -36,9 +36,10 @@ public class DeleteResponseByIdDelegate implements JavaDelegate {
             }
 
 		    reviewQuestionService.deleteResponseByQuestionId(fieldResponseId);
-            
+            String successMessage = "Ответ с ID " + responseId + " успешно удален.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            throw new Exception("У пользователь с ID " + userId + " не получилось удалить ответ.");
             
         }
         

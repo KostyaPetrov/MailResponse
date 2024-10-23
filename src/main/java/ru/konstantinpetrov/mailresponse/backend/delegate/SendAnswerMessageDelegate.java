@@ -16,10 +16,16 @@ public class SendAnswerMessageDelegate implements JavaDelegate{
 
         Long fieldUserId = Long.valueOf(userId);
         Long fieldQuestionId = Long.valueOf(questionId);
+        try {
 
-        kafkaProducerService.sendAnswerAddedToQuestionMessage(fieldQuestionId);
-        kafkaProducerService.sendAnswerAddedToUserMessage(fieldUserId);
 
+                kafkaProducerService.sendAnswerAddedToQuestionMessage(fieldQuestionId);
+                kafkaProducerService.sendAnswerAddedToUserMessage(fieldUserId);
+                String successMessage = "Сообщения о добавлении ответа успешно отправлены.";
+                delegateExecution.setVariable("operationMessage", successMessage);
+        }catch (Exception e){
+            throw new Exception("Failed to send answer message", e);
+        }
     }
 
 }

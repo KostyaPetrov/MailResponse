@@ -33,7 +33,8 @@ public class ChangeBlockStatusDelegate implements JavaDelegate{
                 throw new Exception("Не достаточно прав");    
             }
 			userService.changeBlockStatus(fieldUserId);
-
+            String successMessage = "Статус блокировки пользователя с ID " + userId + " успешно изменен.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
             System.out.println("Error: " + e);
             

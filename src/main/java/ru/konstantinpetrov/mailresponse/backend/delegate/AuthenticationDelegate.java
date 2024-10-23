@@ -9,14 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.konstantinpetrov.mailresponse.backend.entity.User;
 import ru.konstantinpetrov.mailresponse.backend.jwt.JwtUtil;
 import ru.konstantinpetrov.mailresponse.backend.service.CustomUserDetailsService;
+import ru.konstantinpetrov.mailresponse.backend.service.UserService;
+
 @Component
 @RequiredArgsConstructor
 public class AuthenticationDelegate implements JavaDelegate{
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
     private  Boolean isAuth;
 
 
@@ -40,7 +44,13 @@ public class AuthenticationDelegate implements JavaDelegate{
         delegateExecution.setVariable("jwt", jwt);
         isAuth=true;
         delegateExecution.setVariable("isAuth", isAuth);
+        String successMessage = "Пользователь " + userName + " успешно аутентифицирован.";
+        delegateExecution.setVariable("operationMessage", successMessage);
 
+        // Получаем объект пользователя по имени
+        User user = userService.findUser(userName);
+        // Сохраняем ID пользователя в переменной Camunda
+        delegateExecution.setVariable("userId", user.getUserId());
     }
 
 }

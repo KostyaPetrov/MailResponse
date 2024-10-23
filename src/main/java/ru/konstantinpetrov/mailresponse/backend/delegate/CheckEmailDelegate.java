@@ -19,13 +19,18 @@ public class CheckEmailDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        String email = (String) delegateExecution.getVariable("email");
+        Long userId = (Long) delegateExecution.getVariable("userId"); // Получаем userId из переменных процесса
 
-        boolean emailExists = emailRepository.existsByEmail(email);
-        delegateExecution.setVariable("emailExists", emailExists);
+        // Используем исправленный метод existsByUser_UserId
+        boolean emailExistsForUser = emailRepository.existsByUser_UserId(userId);
+        delegateExecution.setVariable("emailExists", emailExistsForUser);
 
-        if (emailExists) {
-            throw new Exception("Email already exists: " + email);
+        if (!emailExistsForUser) {
+            // Если email не существует для данного пользователя, выбрасываем исключение или обрабатываем ситуацию
+            throw new Exception("У пользователя с ID " + userId + " нет связанного email.");
         }
+
+        String successMessage = "Email существует для пользователя с ID " + userId + ".";
+        delegateExecution.setVariable("operationMessage", successMessage);
     }
 }

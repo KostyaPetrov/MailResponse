@@ -36,11 +36,12 @@ public class ChangePermissionStatusDelegate implements JavaDelegate{
                 throw new Exception("Права на изменение статуса доступа имеет только модератор");
             }
 			questionService.changePermissionStatus(fieldQuestionId);
-			
+            String successMessage = "Статус доступа вопроса с ID " + questionId + " успешно изменен.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
             System.out.println("Error: " + e);
             
-        }    
+        }
         
     }
 

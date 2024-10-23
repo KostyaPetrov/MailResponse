@@ -55,5 +55,7 @@ public class UserCleanupDelegate implements JavaDelegate {
 
         // Установка переменной в контексте Camunda для дальнейшего использования
         delegateExecution.setVariable("blockedUsersCount", blockedUsers.size());
+        String successMessage = "Заблокированные пользователи успешно удалены. Количество: " + blockedUsers.size();
+        delegateExecution.setVariable("operationMessage", successMessage);
     }
 }

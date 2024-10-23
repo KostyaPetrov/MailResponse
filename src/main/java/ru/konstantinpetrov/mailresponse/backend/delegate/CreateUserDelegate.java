@@ -39,9 +39,10 @@ public class CreateUserDelegate implements JavaDelegate{
             }
             user.setBlockStatus(BlockStatus.FREE);
 			userService.addUser(user);
-			
+            String successMessage = "Пользователь " + userName + " успешно создан.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            throw new Exception("Не получилось создать пользователя.");
             
         }
     }

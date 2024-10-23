@@ -24,13 +24,11 @@ public class CreateReviewDelegate implements JavaDelegate {
         Long fieldQuestionId = Long.valueOf(questionId);
 
         try {
-            // Вызываем сервис для добавления нового отзыва
             reviewQuestionService.addReview(fieldQuestionId, fieldUserId, textReview);
-            
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e);
+            String successMessage = "Отзыв от пользователя с ID " + userId + " для вопроса с ID " + questionId + " успешно добавлен.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            throw new Exception("У пользователь с ID " + userId + " не получилось отправить ответ.");
         }
     }
 

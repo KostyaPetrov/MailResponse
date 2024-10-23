@@ -1,6 +1,7 @@
 package ru.konstantinpetrov.mailresponse.backend.delegate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -8,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.konstantinpetrov.mailresponse.backend.dtoLayer.QuestionDTO;
 import ru.konstantinpetrov.mailresponse.backend.entity.Question;
 import ru.konstantinpetrov.mailresponse.backend.service.QuestionService;
 
@@ -22,10 +24,23 @@ public class GetQuestionDelegate implements JavaDelegate {
 
         try{
             List<Question> listQuestions = questionService.getQuestion();
+            List<QuestionDTO> listQuestionDTOs = listQuestions.stream()
+                    .map(question -> {
+                        QuestionDTO dto = new QuestionDTO();
+                        dto.setId(question.getId());
+                        dto.setTextQuestion(question.getTextQuestion());
+                        dto.setUserId(question.getUserId());
+                        dto.setCountReview(question.getCountReview());
+                        dto.setPermissionStatus(question.getPermissionStatus());
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+            delegateExecution.setVariable("listQuestions", listQuestionDTOs);
 
-            delegateExecution.setVariable("listQuestions", listQuestions);
+            String successMessage = "Список вопросов успешно получен.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         }catch(Exception e){
-            System.out.println("Error: " + e);
+            throw new Exception("Не получилось получить вопросы.");
 
         }
 

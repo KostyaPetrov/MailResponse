@@ -13,4 +13,6 @@ public interface EmailRepository extends JpaRepository<Email, Long> {
     void deleteByUser(User user);
 
     boolean existsByEmail(String email);
+
+    boolean existsByUser_UserId(Long userId);
 }

@@ -27,15 +27,15 @@ public class FindUserDelegate implements JavaDelegate {
         String name = (String) delegateExecution.getVariable("name");
 
         try {
-            System.out.println("User Controller get name " + name +" for find information");
 			User user = this.userService.findUser(name);
             List<Long> listQuestionId = this.questionService.getIdQuestion(user.getUserId());   
 
             delegateExecution.setVariable("userId", user.getUserId());
             delegateExecution.setVariable("listQuestionId", listQuestionId);
-			
+            String successMessage = "Пользователь " + name + " успешно найден.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            throw new Exception("Пользователя  " + name + " не получилось найти.");
             
         }
     }

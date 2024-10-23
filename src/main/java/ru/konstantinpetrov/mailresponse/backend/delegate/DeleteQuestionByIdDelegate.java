@@ -40,8 +40,10 @@ public class DeleteQuestionByIdDelegate implements JavaDelegate {
                 throw new Exception("Права на удаление имеет только модератор");
             }
 			questionService.deleteQuestionById(fieldQuestionId);
+            String successMessage = "Вопрос с ID " + questionId + " успешно удален.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            throw new Exception("У пользователь с ID " + userId + " не получилось удалить вопрос.");
         }
 
         

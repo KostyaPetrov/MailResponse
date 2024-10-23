@@ -15,7 +15,7 @@ public class CreateQuestionDelegate implements JavaDelegate{
     private final QuestionServiceImpl questionServiceImpl;
 
     @Override
-    public void execute(DelegateExecution delegateExecution){
+    public void execute(DelegateExecution delegateExecution) throws Exception {
         String textQuestion = (String) delegateExecution.getVariable("textQuestion");
         Integer userId = (Integer) delegateExecution.getVariable("userId");
         Integer countReview = 0;
@@ -27,8 +27,13 @@ public class CreateQuestionDelegate implements JavaDelegate{
         question.setCountReview(countReview);
         question.setPermissionStatus(PermissionStatus.OPEN);
         question.setTextQuestion(textQuestion);
-        
+        try {
         questionServiceImpl.addQuestion(question);
+        }catch(Exception e){
+            throw new Exception("У пользователь с ID " + userId + " не получилось отправить вопрос.");
+        }
+        String successMessage = "Вопрос от пользователя с ID " + userId + " успешно создан.";
+        delegateExecution.setVariable("operationMessage", successMessage);
     }
 
     

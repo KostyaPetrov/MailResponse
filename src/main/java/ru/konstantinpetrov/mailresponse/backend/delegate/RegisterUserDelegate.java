@@ -48,10 +48,9 @@ public class RegisterUserDelegate implements JavaDelegate{
             emailObj.setUser(user);
 
             emailRepository.save(emailObj);
-
+            String successMessage = "Пользователь " + userName + " успешно зарегистрирован.";
+            delegateExecution.setVariable("operationMessage", successMessage);
         } catch (Exception e) {
-            // Логирование ошибки
-            System.out.println("Error registering user: " + e.getMessage());
             throw new Exception("Failed to register user", e);
         }
     }
